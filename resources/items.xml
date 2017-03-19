@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<it:items xmlns:it="http://www.example.com/items" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.com/item items.xsd">
+
+	<items-list>
+
+		<item id="1">
+			<category>Велоспорт</category>
+			<type>Велосипед</type>
+			<name>Speedy-9000</name>
+			<price>650</price>
+		</item>
+
+		<item id="2">
+			<category>Велоспорт</category>
+			<type>Велосипед</type>
+			<name>Rover RVR1</name>
+			<price>300</price>
+		</item>
+
+		<item id="3">
+			<category>Велоспорт</category>
+			<type>Велосипед</type>
+			<name>Аист 001</name>
+			<price>130</price>
+		</item>
+
+		<item id="4">
+			<category>Зимний спорт</category>
+			<type>Лыжи</type>
+			<name>Телеханы</name>
+			<price>90</price>
+		</item>
+
+		<item id="5">
+			<category>Зимний спорт</category>
+			<type>Лыжи</type>
+			<name>Спринтер</name>
+			<price>100</price>
+		</item>
+
+		<item id="6">
+			<category>Зимний спорт</category>
+			<type>Санки</type>
+			<name>Ветерок</name>
+			<price>40</price>
+		</item>
+
+		<item id="7">
+			<category>Туризм</category>
+			<type>Палатка</type>
+			<name>Кемпер-25</name>
+			<price>220</price>
+		</item>
+
+		<item id="8">
+			<category>Туризм</category>
+			<type>Палатка</type>
+			<name>Мили-тари</name>
+			<price>500</price>
+		</item>
+
+		<item id="9">
+			<category>Улица</category>
+			<type>Ролики</type>
+			<name>Роллер мастер 2000</name>
+			<price>20</price>
+		</item>
+
+		<item id="10">
+			<category>Улица</category>
+			<type>Ролики</type>
+			<name>PowerGTX-200</name>
+			<price>50</price>
+		</item>
+
+		<item id="11">
+			<category>Улица</category>
+			<type>Скейтборд</type>
+			<name>Слайдер-2РГ</name>
+			<price>25</price>
+		</item>
+
+	</items-list>
+</it:items>
