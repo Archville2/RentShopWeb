@@ -13,9 +13,12 @@ public class ChangeLanguage implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-		request.getSession(true).setAttribute("local", request.getParameter("local"));
+		request.getSession(true).setAttribute("locale", request.getParameter("locale"));
+
+		String page=(String) request.getSession(true).getAttribute("page");
+		
 		try {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher(page).forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

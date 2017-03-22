@@ -10,12 +10,12 @@
 <link href="<c:url value="css/mix.css" />" rel="stylesheet">
 
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.registration" var="reg_button" />
-<fmt:message bundle="${loc}" key="local.login" var="login_button" />
-<fmt:message bundle="${loc}" key="local.login_text" var="login_text" />
-<fmt:message bundle="${loc}" key="local.password_text" var="password_text" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="localization.locale" var="loc" />
+<fmt:message bundle="${loc}" key="locale.registration" var="reg_button" />
+<fmt:message bundle="${loc}" key="locale.login" var="login_button" />
+<fmt:message bundle="${loc}" key="locale.login_text" var="login_text" />
+<fmt:message bundle="${loc}" key="locale.password_text" var="password_text" />
 
 </head>
 <body>
@@ -23,8 +23,8 @@
 		<tr align="right">
 	     	<td><form action="Controller" method="post">
 	     		<input type="hidden" name="command" value="change_language" />
-	     		<input type="image" name="local" value="en" src="img/uk_flag.png" width="32" height="32"/>
-	     		<input type="image" name="local" value="ru" src="img/ru_flag.png" width="32" height="32"/>
+	     		<input type="image" name="locale" value="en" src="img/uk_flag.png" width="32" height="32"/>
+	     		<input type="image" name="locale" value="ru" src="img/ru_flag.png" width="32" height="32"/>
 	     		</form>
 	     	</td>
     	</tr>

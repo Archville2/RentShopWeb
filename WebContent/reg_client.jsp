@@ -9,12 +9,10 @@
 <title>Registration</title>
 <link href="<c:url value="css/mix.css" />" rel="stylesheet">
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />
-<fmt:message bundle="${loc}" key="local.registration" var="reg_button" />
-<fmt:message bundle="${loc}" key="local.login" var="login_button" />
-<fmt:message bundle="${loc}" key="local.login_text" var="login_text" />
-<fmt:message bundle="${loc}" key="local.password_text" var="password_text" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="localization.locale" var="loc" />
+<fmt:message bundle="${loc}" key="locale.client_name" var="client_name" />
+<fmt:message bundle="${loc}" key="locale.client_surname" var="client_surname" />
 
 </head>
 <body>
@@ -62,13 +60,13 @@
 				<td width="200"><input id="i01" type="text" name="name"
 					value="" size="20" oninput="ChangeColor(this.id);"
 					style="background-color: ${err_name}"></td>
-				<td>Имя</td>
+				<td>${client_name}</td>
 			</tr>
 			<tr align="left">
 				<td width="200"><input id="i02" type="text" name="surname"
 					value="" size="20" oninput="ChangeColor(this.id);"
 					style="background-color: ${y}"></td>
-				<td>Фамилия</td>
+				<td>${client_surname}</td>
 			</tr>
 			<tr align="left">
 				<td width="200"><input id="i03" type="text" name="phone"

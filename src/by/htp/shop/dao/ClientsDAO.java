@@ -5,9 +5,9 @@ import by.htp.shop.dao.exception.DAOException;
 
 public interface ClientsDAO {
 
-	void formClientData(ClientData clientData) throws DAOException;
+	ClientData formClientData(String login, String password) throws DAOException;
 	
-	boolean checkClientLoginPassword(String login, String password) throws DAOException;
+	int countClients(String login, String password) throws DAOException;
 	
 	void addNewClient(ClientData clientData) throws DAOException;
 }

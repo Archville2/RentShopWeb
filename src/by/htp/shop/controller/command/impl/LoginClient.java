@@ -1,14 +1,20 @@
 package by.htp.shop.controller.command.impl;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import by.htp.shop.bean.ClientData;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
-import by.htp.shop.service.impl.FormClientDataService;
 import by.htp.shop.service.impl.LoginClientService;
+import by.htp.shop.service.impl.SelectPageService;
 
 public class LoginClient implements Command {
 
@@ -16,18 +22,33 @@ public class LoginClient implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		LoginClientService loginClientService = serviceFactory.getLoginClientService();
-		FormClientDataService formClientDataService = serviceFactory.getFormClientDataService();
+		SelectPageService selectPageService = serviceFactory.getSelectPageService();
 
+		RequestDispatcher dispatcher = null;
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 
 		try {
-			loginClientService.loginClient(login, password);
-			System.out.println("login ok");
-			formClientDataService.formClientData(login);
-			System.out.println("form data ok");
+			ClientData clientData = loginClientService.loginClient(login, password);
+			String page = selectPageService.selectPage(clientData);
+			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("user", clientData);
+			session.setAttribute("page", page);
+			
+			dispatcher = request.getRequestDispatcher(page);
+			dispatcher.forward(request, response);
+
 		} catch (ServiceException e) {
 			throw new ControllerException("login problems", e);
+		} catch (ServletException | IOException e1) {
+			// log
+			try {
+				dispatcher.forward(request, response);
+			} catch (ServletException |IOException e2) {
+				//log
+			}
+			
 		}
 	}
 }
