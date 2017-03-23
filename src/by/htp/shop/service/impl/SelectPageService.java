@@ -16,7 +16,7 @@ public class SelectPageService {
 		}
 		if (clientData.getStatus().equals("admin")) {
 			System.out.println("you are admin");
-			return "/WEB-INF/jsp/admin.jsp";
+			return "/WEB-INF/jsp/admin_page.jsp";
 		}
 
 		return "/WEB-INF/jsp/warning.jsp";

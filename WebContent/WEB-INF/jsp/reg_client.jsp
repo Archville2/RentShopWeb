@@ -27,8 +27,8 @@
 		<tr align="right">
 			<td><form action="Controller" method="post">
 					<input type="hidden" name="command" value="change_language" /> 
-					<input type="image" name="local" value="en" src="img/uk_flag.png" width="32" height="32" /> 
-					<input type="image" name="local" value="ru" src="img/ru_flag.png" width="32" height="32" />
+					<input type="image" name="locale" value="en" src="img/uk_flag.png" width="32" height="32" /> 
+					<input type="image" name="locale" value="ru" src="img/ru_flag.png" width="32" height="32" />
 				</form>
 			</td>
 		</tr>
@@ -98,6 +98,12 @@
 		<input class="new" type="submit" value="Регистрация"
 			style="width: 120Px">
 	</form>
-
+	
+	<form action="Controller" method="post">
+	<input type="hidden" name="command" value="show_main_page" />
+		<input class="new" type="submit" value="На главную"
+			style="width: 120Px">
+	</form>
+	
 </body>
 </html>
