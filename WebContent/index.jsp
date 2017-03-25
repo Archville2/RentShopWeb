@@ -15,8 +15,7 @@
 <fmt:message bundle="${loc}" key="locale.registration" var="reg_button" />
 <fmt:message bundle="${loc}" key="locale.login" var="login_button" />
 <fmt:message bundle="${loc}" key="locale.login_text" var="login_text" />
-<fmt:message bundle="${loc}" key="locale.password_text"
-	var="password_text" />
+<fmt:message bundle="${loc}" key="locale.password_text"	var="password_text" />
 
 </head>
 <body>
@@ -75,19 +74,16 @@
 		</tr>
 	</table>	
 		</form>
-		
-		<form action="Controller" method="post">
+
+	<form action="Controller" method="post">
 		<table border="0" bgcolor="d0d0d0" width="100%">
-		<tr align="center">
-			<td width="50%">&nbsp;</td>
-			<td width="300">
-				<input type="hidden" name="command" value="show_reg_page" /> 
-				<input class="new" type="submit" value="${reg_button}" style="width: 120Px">
-					
-			
-			</td>
-		</tr>
-	</table>
-</form>
+			<tr align="center">
+				<td width="50%">&nbsp;</td>
+				<td width="300"><input type="hidden" name="command"	value="show_reg_page" /> 
+				<input class="new" type="submit" value="${reg_button}" style="width: 120Px"></td>
+			</tr>
+		</table>
+	</form>
+	
 </body>
 </html>

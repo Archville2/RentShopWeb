@@ -1,5 +1,7 @@
 package by.htp.shop.controller.command.impl;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,13 +19,20 @@ public class RegNewClient implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		RegClientService regClientService = serviceFactory.getRegClientService();
 
-		ClientData clientData = new ClientData.ClientDataBuilder(request.getParameter("name"),
-				request.getParameter("surname"), request.getParameter("email"), request.getParameter("phone"),
-				request.getParameter("login"), request.getParameter("password"), "user").build();
+		ClientData clientData = new ClientData.ClientDataBuilder(
+				request.getParameter("name"),
+				request.getParameter("surname"), 
+				request.getParameter("email"),
+				request.getParameter("phone"),
+				request.getParameter("login"), 
+				request.getParameter("password"), 
+				"user").build();
 
 		try {
 			regClientService.regClient(clientData);
-		} catch (ServiceException e) {
+			response.sendRedirect("Controller?command=go_to&go_to_page=reg_ok.jsp");
+
+		} catch (ServiceException | IOException e) {
 			throw new ControllerException("can't register new client", e);
 		}
 	}

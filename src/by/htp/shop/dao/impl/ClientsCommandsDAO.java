@@ -28,6 +28,7 @@ public class ClientsCommandsDAO implements ClientsDAO {
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			return Integer.parseInt(rs.getString(1));
+			
 		} catch (ClassNotFoundException e) {
 			throw new DAOException("Class not found", e);
 		} catch (SQLException e) {
@@ -57,8 +58,14 @@ public class ClientsCommandsDAO implements ClientsDAO {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(request);
 			rs.next();
-			ClientData clientData = new ClientData.ClientDataBuilder(rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)).id(rs.getInt(1)).build();
+			ClientData clientData = new ClientData.ClientDataBuilder(
+					rs.getString(2), 
+					rs.getString(3), 
+					rs.getString(4),
+					rs.getString(5), 
+					rs.getString(6), 
+					rs.getString(7), 
+					rs.getString(8)).id(rs.getInt(1)).build();
 
 			return clientData;
 
@@ -78,7 +85,7 @@ public class ClientsCommandsDAO implements ClientsDAO {
 	}
 
 	@Override
-	public void addNewClient(ClientData clentData) throws DAOException {
+	public void addNewClient(ClientData clientData) throws DAOException {
 		Connection con = null;
 
 		final String update = "INSERT INTO clients (name,surname,email,phone,login,password,status) VALUES (?,?,?,?,?,?,?)";
@@ -86,15 +93,16 @@ public class ClientsCommandsDAO implements ClientsDAO {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/sportshop?useSSL=false", "root", "leevth");
+			
 			PreparedStatement ps = con.prepareStatement(update);
-			ps.setString(1, clentData.getName());
-			ps.setString(2, clentData.getSurname());
-			ps.setString(3, clentData.getEmail());
-			ps.setString(4, clentData.getPhone());
-			ps.setString(5, clentData.getLogin());
-			ps.setString(6, clentData.getPassword());
+			ps.setString(1, clientData.getName());
+			ps.setString(2, clientData.getSurname());
+			ps.setString(3, clientData.getEmail());
+			ps.setString(4, clientData.getPhone());
+			ps.setString(5, clientData.getLogin());
+			ps.setString(6, clientData.getPassword());
 			ps.setString(7, "user");
-			ps.executeUpdate(update);
+			ps.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
 			throw new DAOException("Class not found", e);
