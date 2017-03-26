@@ -9,7 +9,6 @@
 <title>Sport Equipment Shop</title>
 <link href="<c:url value="css/mix.css" />" rel="stylesheet">
 
-
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.locale" var="loc" />
 <fmt:message bundle="${loc}" key="locale.registration" var="reg_button" />
@@ -18,6 +17,7 @@
 <fmt:message bundle="${loc}" key="locale.password_text"	var="password_text" />
 
 </head>
+
 <body>
 	<table border="0" width="100%">
 		<tr align="right">

@@ -41,6 +41,24 @@
 		</tr>
 	</table>
 	
+	<table border="0" bgcolor="ffffff" width="100%">
+		<tr align="center">
+			<td>Категория:
+				<select name="D1" size="1">
+                	<option>Велоспорт</option>
+                	<option>Зимний спорт</option>
+            	</select>
+			</td>
+			<td>Тип товара:
+				<select name="D2" size="1">
+                	<option>Велосипеды</option>
+                	<option>Самокаты</option>
+                	<option>Лыжи</option>
+            	</select>
+			</td>
+		</tr>
+	</table>
+	
 	<table border="0" width="100%">
     <tr>
         <td width="100%"><p align="center">&nbsp;</p>

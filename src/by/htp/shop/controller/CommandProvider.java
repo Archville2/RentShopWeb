@@ -5,6 +5,7 @@ import java.util.Map;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.command.CommandName;
 import by.htp.shop.controller.command.impl.ChangeLanguage;
+import by.htp.shop.controller.command.impl.CheckSession;
 import by.htp.shop.controller.command.impl.GoTo;
 import by.htp.shop.controller.command.impl.LoginClient;
 import by.htp.shop.controller.command.impl.RegNewClient;
@@ -24,6 +25,7 @@ final class CommandProvider {
 		repository.put(CommandName.SHOW_REG_PAGE, new ShowRegPage());
 		repository.put(CommandName.SHOW_MAIN_PAGE, new ShowMainPage());
 		repository.put(CommandName.GO_TO, new GoTo());
+		repository.put(CommandName.CHECK_SESSION, new CheckSession());
 	}
 
 	Command getCommand(String name) throws ControllerException {
