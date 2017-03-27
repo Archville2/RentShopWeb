@@ -1,6 +1,8 @@
 package by.htp.shop.controller.command.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
+import by.htp.shop.service.impl.FormFolderListService;
 import by.htp.shop.service.impl.LoginClientService;
 import by.htp.shop.service.impl.SelectPageService;
 
@@ -23,7 +26,8 @@ public class LoginClient implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		LoginClientService loginClientService = serviceFactory.getLoginClientService();
 		SelectPageService selectPageService = serviceFactory.getSelectPageService();
-
+		FormFolderListService formFolderListService = serviceFactory.getFormFolderListService();
+		
 		RequestDispatcher dispatcher = null;
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
@@ -31,6 +35,15 @@ public class LoginClient implements Command {
 		try {
 			ClientData clientData = loginClientService.loginClient(login, password);
 			String page = selectPageService.selectPage(clientData);
+			List<String> folderList = new ArrayList<>();
+			
+			folderList = formFolderListService.getFolderElementList();
+			
+			for(String list:folderList){
+				System.out.println(list);
+			}
+			
+			request.setAttribute("folder", folderList);
 			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", clientData);

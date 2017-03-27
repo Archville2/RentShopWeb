@@ -45,8 +45,9 @@
 		<tr align="center">
 			<td>Категория:
 				<select name="D1" size="1">
-                	<option>Велоспорт</option>
-                	<option>Зимний спорт</option>
+                	<c:forEach var="f" items="${folder}">
+                	<option>${f}</option>
+                	</c:forEach>
             	</select>
 			</td>
 			<td>Тип товара:
@@ -58,7 +59,7 @@
 			</td>
 		</tr>
 	</table>
-	
+
 	<table border="0" width="100%">
     <tr>
         <td width="100%"><p align="center">&nbsp;</p>
