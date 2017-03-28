@@ -1,6 +1,7 @@
 package by.htp.shop.service.factory;
 
 import by.htp.shop.service.impl.FormFolderListService;
+import by.htp.shop.service.impl.FormItemListService;
 import by.htp.shop.service.impl.LoginClientService;
 import by.htp.shop.service.impl.RegClientService;
 import by.htp.shop.service.impl.SelectPageService;
@@ -12,6 +13,7 @@ public final class ServiceFactory {
 	private final LoginClientService loginClientService = new LoginClientService();
 	private final SelectPageService selectPageService = new SelectPageService();
 	private final FormFolderListService formFolderListService = new FormFolderListService();
+	private final FormItemListService formItemListService = new FormItemListService();
 
 	private ServiceFactory() {
 	}
@@ -23,17 +25,21 @@ public final class ServiceFactory {
 	public RegClientService getRegClientService() {
 		return regClientService;
 	}
-	
-	public LoginClientService getLoginClientService(){
+
+	public LoginClientService getLoginClientService() {
 		return loginClientService;
 	}
-	
-	public SelectPageService getSelectPageService(){
+
+	public SelectPageService getSelectPageService() {
 		return selectPageService;
 	}
 
-	public FormFolderListService getFormFolderListService(){
+	public FormFolderListService getFormFolderListService() {
 		return formFolderListService;
+	}
+
+	public FormItemListService getFormItemListService() {
+		return formItemListService;
 	}
 
 }

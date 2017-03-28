@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import by.htp.shop.bean.ClientData;
+import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
 import by.htp.shop.service.impl.FormFolderListService;
+import by.htp.shop.service.impl.FormItemListService;
 import by.htp.shop.service.impl.LoginClientService;
 import by.htp.shop.service.impl.SelectPageService;
 
@@ -27,7 +29,8 @@ public class LoginClient implements Command {
 		LoginClientService loginClientService = serviceFactory.getLoginClientService();
 		SelectPageService selectPageService = serviceFactory.getSelectPageService();
 		FormFolderListService formFolderListService = serviceFactory.getFormFolderListService();
-		
+		FormItemListService formItemListService = serviceFactory.getFormItemListService();
+
 		RequestDispatcher dispatcher = null;
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
@@ -35,20 +38,21 @@ public class LoginClient implements Command {
 		try {
 			ClientData clientData = loginClientService.loginClient(login, password);
 			String page = selectPageService.selectPage(clientData);
-			List<String> folderList = new ArrayList<>();
-			
-			folderList = formFolderListService.getFolderElementList();
-			
-			for(String list:folderList){
-				System.out.println(list);
+
+			if (clientData != null) {
+				List<String> folderList = new ArrayList<>();
+				List<Item> itemList = new ArrayList<>();
+
+				itemList = formItemListService.formItemList();
+				folderList = formFolderListService.getFolderElementList();
+				request.setAttribute("c_name", clientData.getName());
+				request.setAttribute("folder", folderList);
+				request.setAttribute("items", itemList);
+
+				HttpSession session = request.getSession(true);
+				session.setAttribute("user", clientData);
+				session.setAttribute("url", "Controller?command=login_client&login=" + login + "&password=" + password);
 			}
-			
-			request.setAttribute("folder", folderList);
-			
-			HttpSession session = request.getSession(true);
-			session.setAttribute("user", clientData);
-			session.setAttribute("page", page);
-			
 			dispatcher = request.getRequestDispatcher(page);
 			dispatcher.forward(request, response);
 
@@ -58,10 +62,10 @@ public class LoginClient implements Command {
 			// log
 			try {
 				dispatcher.forward(request, response);
-			} catch (ServletException |IOException e2) {
-				//log
+			} catch (ServletException | IOException e2) {
+				// log
 			}
-			
+
 		}
 	}
 }

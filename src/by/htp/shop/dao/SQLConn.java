@@ -1,4 +1,4 @@
-package by.htp.shop.dao.impl;
+package by.htp.shop.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;

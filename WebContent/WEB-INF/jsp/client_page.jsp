@@ -62,24 +62,38 @@
 
 	<table border="0" width="100%">
     <tr>
-        <td width="100%"><p align="center">&nbsp;</p>
-&nbsp;        </td>
-        <td align="center"><p align="center">Здравствуйте</p>
-        <p align="center">Юзер</p>
+        <td width="100%" valign="top">
+<c:forEach var="l" items="${items}">
+				<table border="1" width="95%">
+					<tr align="center">
+						<td rowspan="2" width="20%"><img src="img/${l.img}"></td>
+						<td width="20%">${l.type}</td>
+						<td width="20%">${l.name}</td>
+						<td width="20%">${l.manufacturer}</td>
+						<td width="20%">${l.price}</td>
+					</tr>
+					<tr align="center">
+						<td colspan="4" width="80%">${l.description}</td>
+					</tr>
+				</table>
+</c:forEach>
+			</td>
+        <td align="center">
+        <p align="center">Здравствуйте</p>
+        <p align="center">${c_name}</p>
         <p align="center">&nbsp;</p>
         <p align="center">Меню:</p>
-        <p align="center">&nbsp;</p>
         <form method="POST">
-            <p><input type="submit" name="B1"
-            value="Личный кабинет"></p>
+            <p><input type="submit" name="B1" value="Личный кабинет" style="width: 120Px"></p>
         </form>
-        <p align="center">&nbsp;</p>
         <form method="POST">
-            <p><input type="submit" name="B1" value="Корзина"></p>
+            <p><input type="submit" name="B2" value="Мои товары" style="width: 120Px"></p>
         </form>
-        <p align="center">&nbsp;</p>
         <form method="POST">
-            <p><input type="submit" name="B1" value="Выход"></p>
+            <p><input type="submit" name="B3" value="Корзина" style="width: 120Px"></p>
+        </form>
+        <form method="POST">
+            <p><input type="submit" name="B4" value="Выход" style="width: 120Px"></p>
         </form>
         </td>
     </tr>
