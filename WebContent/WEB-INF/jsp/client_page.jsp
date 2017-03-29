@@ -14,22 +14,17 @@
 </head>
 <body>
 
-<table border="0" width="100%">
-		<tr align="right">
-	     	<td><form action="Controller" method="post">
-	     		<input type="hidden" name="command" value="change_language" />
-	     		<input type="image" name="local" value="en" src="img/uk_flag.png" width="32" height="32"/>
-	     		<input type="image" name="local" value="ru" src="img/ru_flag.png" width="32" height="32"/>
-	     		</form>
-	     	</td>
-    	</tr>
- </table>
-    
 	<table border="0" width="100%">
 		<tr align="center">
-			<td></td>
-			<td><img src="img/shop_logo.gif"></td>
-			<td></td>
+			<td width="20%"></td>
+			<td width="60%"><img src="img/shop_logo.gif"></td>
+			<td width="20%" valign="top" align="right">
+				<form action="Controller" method="post">
+					<input type="hidden" name="command" value="change_language" /> 
+					<input type="image" name="locale" value="en" src="img/uk_flag.png" width="32" height="32" /> 
+					<input type="image" name="locale" value="ru" src="img/ru_flag.png" width="32" height="32" />
+				</form>
+			</td>
 		</tr>
 	</table>
 	<br>
@@ -73,7 +68,11 @@
 						<td width="20%">${l.price}</td>
 					</tr>
 					<tr align="center">
-						<td colspan="4" width="80%">${l.description}</td>
+						<td colspan="3" width="80%">${l.description}</td>
+						<td>
+							<input type="hidden" name="command" value="add_item" /> 
+							<input type="image" name="cart" value="" src="img/icon_cart.gif" width="32" height="32" /> 
+						</td>
 					</tr>
 				</table>
 </c:forEach>
@@ -83,17 +82,18 @@
         <p align="center">${c_name}</p>
         <p align="center">&nbsp;</p>
         <p align="center">Меню:</p>
-        <form method="POST">
+        <form action="Controller" method="post">
             <p><input type="submit" name="B1" value="Личный кабинет" style="width: 120Px"></p>
         </form>
-        <form method="POST">
+        <form action="Controller" method="post">
             <p><input type="submit" name="B2" value="Мои товары" style="width: 120Px"></p>
         </form>
-        <form method="POST">
+        <form action="Controller" method="post">
             <p><input type="submit" name="B3" value="Корзина" style="width: 120Px"></p>
         </form>
-        <form method="POST">
-            <p><input type="submit" name="B4" value="Выход" style="width: 120Px"></p>
+        <form action="Controller" method="post">
+        	<input type="hidden" name="command"	value="logout_client" />
+            <p><input type="submit" value="Выход" style="width: 120Px"></p>
         </form>
         </td>
     </tr>
