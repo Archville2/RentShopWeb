@@ -4,12 +4,14 @@ import java.util.Map;
 
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.command.CommandName;
+import by.htp.shop.controller.command.impl.AddToCart;
 import by.htp.shop.controller.command.impl.ChangeLanguage;
 import by.htp.shop.controller.command.impl.CheckSession;
 import by.htp.shop.controller.command.impl.GoTo;
 import by.htp.shop.controller.command.impl.LogOutClient;
 import by.htp.shop.controller.command.impl.LoginClient;
 import by.htp.shop.controller.command.impl.RegNewClient;
+import by.htp.shop.controller.command.impl.ShowCart;
 import by.htp.shop.controller.command.impl.ShowMainPage;
 import by.htp.shop.controller.command.impl.ShowRegPage;
 import by.htp.shop.controller.exception.ControllerException;
@@ -28,6 +30,8 @@ final class CommandProvider {
 		repository.put(CommandName.SHOW_MAIN_PAGE, new ShowMainPage());
 		repository.put(CommandName.GO_TO, new GoTo());
 		repository.put(CommandName.CHECK_SESSION, new CheckSession());
+		repository.put(CommandName.ADD_TO_CART, new AddToCart());
+		repository.put(CommandName.SHOW_CART, new ShowCart());
 	}
 
 	Command getCommand(String name) throws ControllerException {

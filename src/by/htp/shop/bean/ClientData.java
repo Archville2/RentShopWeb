@@ -1,24 +1,29 @@
 package by.htp.shop.bean;
 
-public class ClientData {
-	private final int id;
-	private final String name;
-	private final String surname;
-	private final String email;
-	private final String phone;
-	private final String login;
-	private final String password;
-	private final String status;
+import java.util.ArrayList;
+import java.util.List;
 
-	private ClientData(ClientDataBuilder builder) {
-		this.id = builder.id;
-		this.name = builder.name;
-		this.surname = builder.surname;
-		this.email = builder.email;
-		this.phone = builder.phone;
-		this.login = builder.login;
-		this.password = builder.password;
-		this.status = builder.status;
+public class ClientData {
+	private int id;
+	private String name;
+	private String surname;
+	private String email;
+	private String phone;
+	private String login;
+	private String password;
+	private String status;
+	private List<Integer> cart = new ArrayList<>();
+
+	public ClientData(int id, String name, String surname, String email, String phone, String login, String password,
+			String status) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.phone = phone;
+		this.login = login;
+		this.password = password;
+		this.status = status;
 	}
 
 	public int getId() {
@@ -36,7 +41,7 @@ public class ClientData {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -52,37 +57,17 @@ public class ClientData {
 	public String getStatus() {
 		return status;
 	}
-
-	public static class ClientDataBuilder {
-		private int id;
-		private final String name;
-		private final String surname;
-		private final String phone;
-		private final String email;
-		private final String login;
-		private final String password;
-		private final String status;
-
-		public ClientDataBuilder(String name, String surname, String email, String phone, String login, String password,
-				String status) {
-			this.name = name;
-			this.surname = surname;
-			this.email = email;
-			this.phone = phone;
-			this.login = login;
-			this.password = password;
-			this.status = status;
-		}
-
-		public ClientDataBuilder id(int id) {
-			this.id = id;
-			return this;
-		}
-
-		public ClientData build() {
-			return new ClientData(this);
-		}
-
+	
+	public int getCartValue(int position) {
+		return cart.get(position);
 	}
 
+	public void setCartValue(int value) {
+		Integer v = value;
+		cart.add(v);
+	}
+	
+	public List<Integer> getCart(){
+		return cart;
+	}
 }

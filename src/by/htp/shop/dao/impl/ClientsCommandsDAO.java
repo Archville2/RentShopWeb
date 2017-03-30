@@ -63,10 +63,10 @@ public class ClientsCommandsDAO implements ClientsDAO {
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 
-			ClientData clientData = new ClientData.ClientDataBuilder(
+			ClientData clientData = new ClientData(rs.getInt(1),
 					rs.getString(2), rs.getString(3), rs.getString(4),
 					rs.getString(5), rs.getString(6), rs.getString(7), 
-					rs.getString(8)).id(rs.getInt(1)).build();
+					rs.getString(8));
 
 			return clientData;
 

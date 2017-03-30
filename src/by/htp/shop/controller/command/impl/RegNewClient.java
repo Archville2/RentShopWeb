@@ -19,14 +19,15 @@ public class RegNewClient implements Command {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		RegClientService regClientService = serviceFactory.getRegClientService();
 
-		ClientData clientData = new ClientData.ClientDataBuilder(
+		ClientData clientData = new ClientData(
+				0,
 				request.getParameter("name"),
 				request.getParameter("surname"), 
 				request.getParameter("email"),
 				request.getParameter("phone"),
 				request.getParameter("login"), 
 				request.getParameter("password"), 
-				"user").build();
+				"user");
 
 		try {
 			regClientService.regClient(clientData);

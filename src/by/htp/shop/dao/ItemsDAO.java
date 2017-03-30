@@ -7,6 +7,7 @@ import by.htp.shop.dao.exception.DAOException;
 
 public interface ItemsDAO {
 
+	List<Item> getCartItems(List<Integer> cart) throws DAOException;
 	List<Item> getItemList() throws DAOException;
 	List<String> getFolderElements() throws DAOException;
 	

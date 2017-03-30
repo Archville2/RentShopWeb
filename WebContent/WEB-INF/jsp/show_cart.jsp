@@ -5,15 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Client page</title>
+<title>Cart</title>
 <link href="<c:url value="css/mix.css" />" rel="stylesheet">
 
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
 </head>
 <body>
-
-<iframe width="0" height="0" name="dummyframe" id="dummyframe" style="visibility:hidden"></iframe>
 
 	<table border="0" width="100%">
 		<tr align="center">
@@ -28,6 +26,7 @@
 			</td>
 		</tr>
 	</table>
+	
 	<br>
 	<table border="0" bgcolor="f0f0f0" width="100%">
 		<tr align="center">
@@ -36,30 +35,11 @@
 			<td width="33%"><p>Контактные данные</p></td>
 		</tr>
 	</table>
-	
-	<table border="0" bgcolor="ffffff" width="100%">
-		<tr align="center">
-			<td>Категория:
-				<select name="D1" size="1">
-                	<c:forEach var="line" items="${folder}">
-                	<option>${line}</option>
-                	</c:forEach>
-            	</select>
-			</td>
-			<td>Тип товара:
-				<select name="D2" size="1">
-                	<option>Велосипеды</option>
-                	<option>Самокаты</option>
-                	<option>Лыжи</option>
-            	</select>
-			</td>
-		</tr>
-	</table>
 
 	<table border="0" width="100%">
     <tr>
         <td width="100%" valign="top">
-			<c:forEach var="field" items="${items}">
+			<c:forEach var="field" items="${cart}">
 				<table border="1" width="95%">
 					<tr align="center">
 						<td rowspan="2" width="20%"><img src="img/${field.img}"></td>
@@ -101,8 +81,8 @@
         </form>
         </td>
     </tr>
+    
 </table>
-	
 
 </body>
 </html>
