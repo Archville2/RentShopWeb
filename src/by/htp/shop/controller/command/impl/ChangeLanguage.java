@@ -23,7 +23,7 @@ public class ChangeLanguage implements Command {
 				response.sendRedirect(url);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ControllerException("IO problems", e);
 		}
 	}
 }

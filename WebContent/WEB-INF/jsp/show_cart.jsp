@@ -8,8 +8,11 @@
 <title>Cart</title>
 <link href="<c:url value="css/mix.css" />" rel="stylesheet">
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="localization.locale" var="loc" />
+<fmt:message bundle="${loc}" key="locale.main_button" var="main" />
+<fmt:message bundle="${loc}" key="locale.logo_map" var="logo_map" />
+<fmt:message bundle="${loc}" key="locale.logo_about" var="logo_about" />
 </head>
 <body>
 
@@ -30,9 +33,14 @@
 	<br>
 	<table border="0" bgcolor="f0f0f0" width="100%">
 		<tr align="center">
-			<td width="33%"><p>Список товаров</p></td>
-			<td width="33%"><p>Карта проезда</p></td>
-			<td width="33%"><p>Контактные данные</p></td>
+			<td width="33%">
+				<form action="Controller" method="post">
+					<input type="hidden" name="command" value="show_main_page" /> 
+					<input class="new" type="submit" value="${main}" style="width: 150Px">
+				</form>
+			</td>
+			<td width="33%"><p>${logo_map}</p></td>
+			<td width="33%"><p>${logo_about}</p></td>
 		</tr>
 	</table>
 
@@ -43,17 +51,25 @@
 				<table border="1" width="95%">
 					<tr align="center">
 						<td rowspan="2" width="20%"><img src="img/${field.img}"></td>
-						<td width="20%">${field.type}</td>
-						<td width="20%">${field.name}</td>
-						<td width="20%">${field.manufacturer}</td>
-						<td width="20%">${field.price}</td>
+						<td width="20%">Тип: ${field.type}</td>
+						<td width="20%">Название: ${field.name}</td>
+						<td width="20%">Производитель: ${field.manufacturer}</td>
+						<td width="20%">Цена за 30 дней: ${field.price} руб.</td>
 					</tr>
 					<tr align="center">
 						<td colspan="3" width="80%">${field.description}</td>
 						<td>
-							<form action="Controller" target="dummyframe" method="post">
-							<input type="hidden" name="command" value="add_to_cart" /> 
-							<input type="image" name="cart" value="${field.id}" src="img/icon_cart.gif" width="32" height="32" /> 
+							<form action="Controller" method="post">
+							<input type="hidden" name="command" value="rent_item" />
+							<input type="hidden" name="equipment_id" value="${field.id}" />
+							<input type="hidden" name="client_id" value="${user.id}" />
+							срок проката (дней)
+							<select name="days" size="1">
+								<option value="30">30</option>
+								<option value="60">60</option>
+								<option value="90">90</option>
+							</select><br>
+							<input type="submit" name="cart" value="Оформить" /> 
 							</form>
 						</td>
 					</tr>
@@ -62,22 +78,21 @@
 			</td>
         <td align="center">
         <p align="center">Здравствуйте</p>
-        <p align="center">${c_name}</p>
+        <p align="center">${user.name}</p>
         <p align="center">&nbsp;</p>
         <p align="center">Меню:</p>
         <form action="Controller" method="post">
-            <p><input type="submit" name="B1" value="Личный кабинет" style="width: 120Px"></p>
+            <p><input class="new" type="submit" name="B1" value="Личный кабинет" style="width: 120Px"></p>
         </form>
         <form action="Controller" method="post">
-            <p><input type="submit" name="B2" value="Мои товары" style="width: 120Px"></p>
+        	<input type="hidden" name="command"	value="show_my_items" />
+        	<input type="hidden" name="client_id" value="${user.id}" />
+            <p><input class="new" type="submit" name="B2" value="Мои товары" style="width: 120Px"></p>
         </form>
-        <form action="Controller" method="post">
-        	<input type="hidden" name="command"	value="show_cart" />
-            <p><input type="submit" name="B3" value="Корзина" style="width: 120Px"></p>
-        </form>
-        <form action="Controller" method="post">
+            <p><input class="old" type="submit" name="B3" value="Корзина" style="width: 120Px"></p>
+         <form action="Controller" method="post">
         	<input type="hidden" name="command"	value="logout_client" />
-            <p><input type="submit" value="Выход" style="width: 120Px"></p>
+            <p><input class="new" type="submit" value="Выход" style="width: 120Px"></p>
         </form>
         </td>
     </tr>

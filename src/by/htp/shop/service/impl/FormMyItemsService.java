@@ -8,17 +8,16 @@ import by.htp.shop.dao.exception.DAOException;
 import by.htp.shop.dao.factory.DAOFactory;
 import by.htp.shop.service.exception.ServiceException;
 
-public class FormItemListService {
+public class FormMyItemsService {
 
-	public List<Item> formItemList() throws ServiceException {
+	public List<Item> formMyItems(int clientId) throws ServiceException {
 		DAOFactory daoObjectFactory = DAOFactory.getInstance();
 		ItemsDAO itemsDAO = daoObjectFactory.getItemsCommandsDAO();
 
 		try {
-			List<Item> itemList = itemsDAO.getItemList();
-			return itemList;
+			return itemsDAO.getMyItems(clientId);
 		} catch (DAOException e) {
-			throw new ServiceException("problem with items list", e);
+			throw new ServiceException("cant get my items", e);
 		}
 
 	}

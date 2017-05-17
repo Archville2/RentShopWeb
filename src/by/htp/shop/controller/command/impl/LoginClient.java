@@ -1,7 +1,6 @@
 package by.htp.shop.controller.command.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,10 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import by.htp.shop.bean.ClientData;
 import by.htp.shop.bean.Item;
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
+import by.htp.shop.service.exception.LoginException;
 import by.htp.shop.service.exception.ServiceException;
 import by.htp.shop.service.factory.ServiceFactory;
 import by.htp.shop.service.impl.FormFolderListService;
@@ -22,7 +24,8 @@ import by.htp.shop.service.impl.LoginClientService;
 import by.htp.shop.service.impl.SelectPageService;
 
 public class LoginClient implements Command {
-
+	final static Logger logger = Logger.getLogger(LoginClient.class);
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -40,12 +43,8 @@ public class LoginClient implements Command {
 			String page = selectPageService.selectPage(clientData);
 
 			if (clientData != null) {
-				List<String> folderList = new ArrayList<>();
-				List<Item> itemList = new ArrayList<>();
-
-				itemList = formItemListService.formItemList();
-				folderList = formFolderListService.getFolderElementList();
-				request.setAttribute("c_name", clientData.getName());
+				List<Item> itemList = formItemListService.formItemList();
+				List<String> folderList = formFolderListService.getFolderElementList();
 				request.setAttribute("folder", folderList);
 				request.setAttribute("items", itemList);
 
@@ -58,14 +57,23 @@ public class LoginClient implements Command {
 
 		} catch (ServiceException e) {
 			throw new ControllerException("login problems", e);
-		} catch (ServletException | IOException e1) {
-			// log
+		} catch (ServletException | IOException e) {
+				logger.error(e);
 			try {
 				dispatcher.forward(request, response);
-			} catch (ServletException | IOException e2) {
-				// log
+			} catch (ServletException | IOException e1) {
+				logger.error(e1);
 			}
 
+		} catch (LoginException e) {
+			logger.error("wrong login/password", e);
+			request.setAttribute("message", "пользователи с таким логином и паролем не найдены");
+			dispatcher = request.getRequestDispatcher("index.jsp");
+			try {
+				dispatcher.forward(request, response);
+			} catch (ServletException | IOException e1) {
+				logger.error(e1);
+			}
 		}
 	}
 }

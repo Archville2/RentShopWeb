@@ -2,16 +2,12 @@ package by.htp.shop.controller;
 
 import java.io.IOException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 
 import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
@@ -19,7 +15,9 @@ import by.htp.shop.controller.exception.ControllerException;
 public final class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final CommandProvider provider = new CommandProvider();
-
+	private final static Logger logger = Logger.getLogger(Controller.class);
+	private final static String COMMAND="command";
+	
 	public Controller() {
 		super();
 	}
@@ -32,13 +30,13 @@ public final class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String commandName = request.getParameter("command");
+		String commandName = request.getParameter(COMMAND);
 
 		try {
 			Command command = provider.getCommand(commandName);
 			command.execute(request, response);
 		} catch (ControllerException e) {
-			e.printStackTrace();
+			logger.error("controller message.",e);
 		}
 
 	}

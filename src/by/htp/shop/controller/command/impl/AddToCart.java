@@ -9,16 +9,15 @@ import by.htp.shop.controller.command.Command;
 import by.htp.shop.controller.exception.ControllerException;
 
 public class AddToCart implements Command {
+	private final static String CART="cart";
+	private final static String USER="user";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ControllerException {
-		String id = request.getParameter("cart");
+		String id = request.getParameter(CART);
 		
 		HttpSession session = request.getSession(true);
-		ClientData clientData = (ClientData) session.getAttribute("user");
+		ClientData clientData = (ClientData) session.getAttribute(USER);
 		clientData.setCartValue(Integer.parseInt(id));
-		
-		System.out.println(id);
-		
 	}
 }

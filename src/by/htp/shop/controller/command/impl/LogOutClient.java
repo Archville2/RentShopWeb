@@ -20,7 +20,7 @@ public class LogOutClient implements Command{
 		try {
 			response.sendRedirect("index.jsp");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ControllerException("log out problems", e);
 		}
 	}
 }

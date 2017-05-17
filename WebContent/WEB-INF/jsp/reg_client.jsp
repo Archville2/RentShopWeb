@@ -19,6 +19,8 @@
 <fmt:message bundle="${loc}" key="locale.password_text" var="client_password" />
 <fmt:message bundle="${loc}" key="locale.registration" var="registration" />
 <fmt:message bundle="${loc}" key="locale.main_button" var="main" />
+<fmt:message bundle="${loc}" key="locale.logo_map" var="logo_map" />
+<fmt:message bundle="${loc}" key="locale.logo_about" var="logo_about" />
 
 </head>
 <body>
@@ -47,9 +49,14 @@
 
 	<table border="0" bgcolor="f0f0f0" width="100%">
 		<tr align="center">
-			<td width="33%"><p>Список товаров</p></td>
-			<td width="33%"><p>Карта проезда</p></td>
-			<td width="33%"><p>Контактные данные</p></td>
+			<td width="33%">
+				<form action="Controller" method="post">
+					<input type="hidden" name="command" value="show_main_page" /> 
+					<input class="new" type="submit" value="${main}" style="width: 150Px">
+				</form>
+			</td>
+			<td width="33%"><p>${logo_map}</p></td>
+			<td width="33%"><p>${logo_about}</p></td>
 		</tr>
 	</table>
 
@@ -59,44 +66,40 @@
 		<table border="0" width="100%">
 			<tr align="left">
 				<td width="200">
-				<input id="i01" type="text" name="name"	value="" style="width: 200Px"></td>
-				<td>${client_name}</td>
+				<input id="i01" type="text" name="name"	value="${client.name}" style="width: 200Px"></td>
+				<td width="200">${client_name}</td>
+				<td align="center" rowspan="6">${message}</td>
 			</tr>
 			<tr align="left">
 				<td width="200">
-				<input id="i02" type="text" name="surname" value="" style="width: 200Px"></td>
-				<td>${client_surname}</td>
+				<input id="i02" type="text" name="surname" value="${client.surname}" style="width: 200Px"></td>
+				<td width="200">${client_surname}</td>
 			</tr>
 			<tr align="left">
 				<td width="200">
-				<input id="i03" type="text" name="phone" value="" style="width: 200Px"></td>
-				<td>${client_email}</td>
+				<input id="i03" type="text" name="email" value="${client.email}" style="width: 200Px"></td>
+				<td width="200">${client_email}</td>
 			</tr>
 			<tr align="left">
 				<td width="200">
-				<input id="i04" type="text" name="email" value="" style="width: 200Px"></td>
-				<td>${client_phone}</td>
+				<input id="i04" type="text" name="phone" value="${client.phone}" style="width: 200Px"></td>
+				<td width="200">${client_phone}</td>
 			</tr>
 			<tr align="left">
 				<td width="200">
-				<input id="i05" type="text" name="login" value="" style="width: 200Px"></td>
-				<td>${client_login}</td>
+				<input id="i05" type="text" name="login" value="${client.login}" style="width: 200Px"></td>
+				<td width="200">${client_login}</td>
 			</tr>
 			<tr align="left">
 				<td width="200">
-				<input id="i06" type="text" name="password"	value="" style="width: 200Px"></td>
-				<td>${client_password}</td>
+				<input id="i06" type="text" name="password"	value="${client.password}" style="width: 200Px"></td>
+				<td width="200">${client_password}</td>
 			</tr>
 		</table>
 
 		<br> 
 		<input type="hidden" name="command" value="reg_new_client" />
 		<input class="new" type="submit" value="${registration}" style="width: 200Px">
-	</form>
-	
-	<form action="Controller" method="post">
-		<input type="hidden" name="command" value="show_main_page" />
-		<input class="new" type="submit" value="${main}" style="width: 200Px">
 	</form>
 	
 </body>

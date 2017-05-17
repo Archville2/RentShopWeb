@@ -14,11 +14,14 @@
 <fmt:message bundle="${loc}" key="locale.login" var="login_button" />
 <fmt:message bundle="${loc}" key="locale.login_text" var="login_text" />
 <fmt:message bundle="${loc}" key="locale.password_text"	var="password_text" />
+<fmt:message bundle="${loc}" key="locale.logo_map" var="logo_map" />
+<fmt:message bundle="${loc}" key="locale.logo_about" var="logo_about" />
+<fmt:message bundle="${loc}" key="locale.main_button" var="main" />
 
 </head>
 
 <c:if test="${sessionScope.user != null}">
-	<c:redirect url="${sessionScope.url}"/>
+	<c:redirect url="Controller?command=show_main_page"/>
 </c:if>
 
 <body>
@@ -41,30 +44,33 @@
 	
 	<table border="0" bgcolor="f0f0f0" width="100%">
 		<tr align="center">
-			<td width="33%"><p>Список товаров</p></td>
-			<td width="33%"><p>Карта проезда</p></td>
-			<td width="33%"><p>Контактные данные</p></td>
+			<td width="33%">
+				<input class="old" type="submit" value="${main}" style="width: 150Px">
+			</td>
+			<td width="33%"><p>${logo_map}</p></td>
+			<td width="33%"><p>${logo_about}</p></td>
 		</tr>
 	</table>
 	<br>
 
+	<table border="0" width="100%">
+	<tr>
+	<td width="100%" align="center">${message}</td>
+	<td>
 	<form action="Controller" method="post">
 		<table border="0" bgcolor="d0d0d0" width="100%">
 			<tr align="center">
-				<td width="50%">&nbsp;</td>
-				<td width="300"><input type="text" name="login" value="" size="20"><br>${login_text}</td>
+				<td width="100%"><input type="text" name="login" value="" size="20"><br>${login_text}</td>
 			</tr>
 			<tr align="center">
-				<td width="50%">&nbsp;</td>
-				<td width="300"><input type="password" name="password" value="" size="20"><br>${password_text}</td>
+				<td width="100%"><input type="password" name="password" value="" size="20"><br>${password_text}</td>
 			</tr>
 		</table>
 	
 
 		<table border="0" bgcolor="d0d0d0" width="100%">
 			<tr align="center">
-				<td width="50%">&nbsp;</td>
-				<td width="300">
+				<td>
 					<input type="hidden" name="command" value="login_client" /> 
 					<input class="new" type="submit" value="${login_button}" style="width: 120Px">
 				</td>
@@ -75,13 +81,14 @@
 	<form action="Controller" method="post">
 		<table border="0" bgcolor="d0d0d0" width="100%">
 			<tr align="center">
-				<td width="50%">&nbsp;</td>
-				<td width="300">
+				<td align="center">
 				<input type="hidden" name="command"	value="show_reg_page" /> 
 				<input class="new" type="submit" value="${reg_button}" style="width: 120Px"></td>
 			</tr>
 		</table>
 	</form>
-		
+	</td>
+	</tr>
+</table>
 </body>
 </html>

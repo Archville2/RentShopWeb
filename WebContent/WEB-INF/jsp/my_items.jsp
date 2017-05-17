@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Client page</title>
+<title>my items page</title>
 <link href="<c:url value="css/mix.css" />" rel="stylesheet">
 
 <fmt:setLocale value="${sessionScope.locale}" />
@@ -35,43 +35,20 @@
 	<table border="0" bgcolor="f0f0f0" width="100%">
 		<tr align="center">
 			<td width="33%">
-				<input class="old" type="submit" value="${main}" style="width: 150Px">
+				<form action="Controller" method="post">
+					<input type="hidden" name="command" value="show_main_page" /> 
+					<input class="new" type="submit" value="${main}" style="width: 150Px">
+				</form>
 			</td>
 			<td width="33%"><p>${logo_map}</p></td>
 			<td width="33%"><p>${logo_about}</p></td>
 		</tr>
 	</table>
 	
-	<table border="0" bgcolor="ffffff" width="100%">
-		<tr align="center">
-			<td>Категория:
-			<form action="Controller" method="post">
-				<select name="D1" size="1">
-                	<c:forEach var="line" items="${folder}">
-                	<option>${line}</option>
-                	</c:forEach>
-            	</select>
-            	<input class="new" type="submit" value="выбрать"/>
-            </form>
-			</td>
-			<td>Тип товара:
-			<form action="Controller" method="post">
-				<select name="D2" size="1">
-					<option>*</option>
-                	<option>Велосипеды</option>
-                	<option>Самокаты</option>
-                	<option>Лыжи</option>
-            	</select>
-            	<input class="new" type="submit" value="выбрать"/>
-            </form>
-			</td>
-		</tr>
-	</table>
-
 	<table border="0" width="100%">
     <tr>
         <td width="100%" valign="top">
-			<c:forEach var="field" items="${items}">
+			<c:forEach var="field" items="${my_items}">
 				<table border="1" width="95%">
 					<tr align="center">
 						<td rowspan="2" width="20%"><img src="img/${field.img}"></td>
@@ -84,8 +61,10 @@
 						<td colspan="3" width="80%">${field.description}</td>
 						<td>
 							<form action="Controller" target="dummyframe" method="post">
-							<input type="hidden" name="command" value="add_to_cart" /> 
-							<input type="image" name="cart" value="${field.id}" src="img/icon_cart.gif" width="32" height="32" /> 
+							<input type="hidden" name="command" value="return_item" />
+							<input type="hidden" name="equipment_id" value="${field.id}" />
+							<input type="hidden" name="client_id" value="${user.id}" />   
+							<input type="submit" name="return_button" value="Оформить взврат" style="width: 120Px">
 							</form>
 						</td>
 					</tr>
@@ -100,11 +79,7 @@
         <form action="Controller" method="post">
             <p><input class="new" type="submit" name="B1" value="Личный кабинет" style="width: 120Px"></p>
         </form>
-        <form action="Controller" method="post">
-        	<input type="hidden" name="command"	value="show_my_items" />
-        	<input type="hidden" name="client_id" value="${user.id}" />
-            <p><input class="new" type="submit" name="B2" value="Мои товары" style="width: 120Px"></p>
-        </form>
+            <p><input class="old" type="submit" name="B2" value="Мои товары" style="width: 120Px"></p>
         <form action="Controller" method="post">
         	<input type="hidden" name="command"	value="show_cart" />
             <p><input class="new" type="submit" name="B3" value="Корзина" style="width: 120Px"></p>
@@ -116,7 +91,6 @@
         </td>
     </tr>
 </table>
-	
 
 </body>
 </html>

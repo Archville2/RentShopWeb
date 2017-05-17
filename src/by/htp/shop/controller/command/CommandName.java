@@ -10,5 +10,8 @@ public enum CommandName {
 	GO_TO, 
 	CHECK_SESSION,
 	ADD_TO_CART,
-	SHOW_CART
+	SHOW_CART,
+	RENT_ITEM,
+	SHOW_MY_ITEMS,
+	RETURN_ITEM
 }

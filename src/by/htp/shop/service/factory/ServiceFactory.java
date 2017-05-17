@@ -1,10 +1,13 @@
 package by.htp.shop.service.factory;
 
+import by.htp.shop.service.impl.AddRentedItemService;
 import by.htp.shop.service.impl.FormCartItemsService;
 import by.htp.shop.service.impl.FormFolderListService;
 import by.htp.shop.service.impl.FormItemListService;
+import by.htp.shop.service.impl.FormMyItemsService;
 import by.htp.shop.service.impl.LoginClientService;
 import by.htp.shop.service.impl.RegClientService;
+import by.htp.shop.service.impl.RemoveRentedItemService;
 import by.htp.shop.service.impl.SelectPageService;
 
 public final class ServiceFactory {
@@ -16,6 +19,9 @@ public final class ServiceFactory {
 	private final FormFolderListService formFolderListService = new FormFolderListService();
 	private final FormItemListService formItemListService = new FormItemListService();
 	private final FormCartItemsService formCartItemsService = new FormCartItemsService();
+	private final AddRentedItemService addRentedItemService = new AddRentedItemService();
+	private final FormMyItemsService formMyItemsService = new FormMyItemsService();
+	private final RemoveRentedItemService removeRentedItemService = new RemoveRentedItemService();
 
 	private ServiceFactory() {
 	}
@@ -43,9 +49,20 @@ public final class ServiceFactory {
 	public FormItemListService getFormItemListService() {
 		return formItemListService;
 	}
-	
-	public FormCartItemsService getFormCartItemsService () {
+
+	public FormCartItemsService getFormCartItemsService() {
 		return formCartItemsService;
 	}
 
+	public AddRentedItemService getAddRentedItemService() {
+		return addRentedItemService;
+	}
+
+	public FormMyItemsService getFormMyItemsService() {
+		return formMyItemsService;
+	}
+
+	public RemoveRentedItemService getRemoveRentedItemService() {
+		return removeRentedItemService;
+	}
 }

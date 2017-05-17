@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
+
 import by.htp.shop.bean.ClientData;
 import by.htp.shop.dao.ClientsDAO;
 import by.htp.shop.dao.SQLConn;
@@ -14,39 +16,40 @@ import by.htp.shop.dao.exception.DAOException;
 import by.htp.shop.dao.provider.ConnectionPoolProvider;
 
 public class ClientsCommandsDAO implements ClientsDAO {
+	final static Logger logger = Logger.getLogger(ClientsCommandsDAO.class);
 	ConnectionPoolProvider poolProvider = ConnectionPoolProvider.getInstance();
 	SQLConn sqlConnection = poolProvider.getSQLConn();
 
-	final String COUNT_CLIENTS = "SELECT COUNT(*) AS TotalUsers FROM clients WHERE login=? AND password=?";
+	final String COUNT_CLIENTS = "SELECT COUNT(*) AS TotalUsers FROM clients WHERE login=?";
 	final String FORM_CLIENTS = "SELECT * FROM clients WHERE login=? AND password=?";
 	final String ADD_CLIENT = "INSERT INTO clients (name,surname,email,phone,login,password,status) VALUES (?,?,?,?,?,?,?)";
 
 	@Override
-	public int countClients(String login, String password) throws DAOException {
+	public int countClients(String login) throws DAOException {
 		final int LOGIN = 1;
-		final int PASSWORD = 2;
+
 		Connection con = null;
 
 		try {
 			con = sqlConnection.getConnection();
 			PreparedStatement ps = con.prepareStatement(COUNT_CLIENTS);
 			ps.setString(LOGIN, login);
-			ps.setString(PASSWORD, password);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			return Integer.parseInt(rs.getString(1));
 
 		} catch (NamingException | SQLException e) {
-			throw new DAOException("SQL problems", e);
+			logger.error("SQL problems", e);
 		} finally {
 			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
-					throw new DAOException("SQL close problems", e);
+					logger.error("SQL close problems", e);
 				}
 			}
 		}
+		return 0;
 	}
 
 	@Override
@@ -71,16 +74,17 @@ public class ClientsCommandsDAO implements ClientsDAO {
 			return clientData;
 
 		} catch (NamingException | SQLException e) {
-			throw new DAOException("SQL problems", e);
+			logger.error("SQL problems", e);
 		} finally {
 			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
-					throw new DAOException("SQL close problems", e);
+					logger.error("SQL close problems", e);
 				}
 			}
 		}
+		return null;
 	}
 
 	@Override
@@ -92,8 +96,10 @@ public class ClientsCommandsDAO implements ClientsDAO {
 		final int LOGIN = 5;
 		final int PASSWORD = 6;
 		final int STATUS = 7;
+		
 		Connection con = null;
-
+		clientData.setID(1);
+		
 		try {
 			con = sqlConnection.getConnection();
 
@@ -108,13 +114,13 @@ public class ClientsCommandsDAO implements ClientsDAO {
 			ps.executeUpdate();
 
 		} catch (NamingException | SQLException e) {
-			throw new DAOException("SQL problems", e);
+			logger.error("SQL problems", e);
 		} finally {
 			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
-					throw new DAOException("SQL close problems", e);
+					logger.error("SQL close problems", e);
 				}
 			}
 		}
